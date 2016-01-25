@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Binary Counter</title>
+  <style>
+    html,body{height: 100%;}
+    body,.circle{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    div{
+      display: flex;
+      width: 960px;
+      height: 100px;
+      justify-content: space-between;
+     flex-direction: row-reverse;
+    }
+    .circle{
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      font-size: 50px;
+      background: indigo;
+      color: indigo;
+    }
+  </style>
+</head>
+<body>
+ <h2>Count</h2>
+ <h2 class="current"></h2>
+  <div class="digram">
+    <div class="circle">1</div>
+    <div class="circle">2</div>
+    <div class="circle">4</div>
+    <div class="circle">8</div>
+    <div class="circle">16</div>
+    <div class="circle">32</div>
+    <div class="circle">64</div>
+    <div class="circle">128</div>
+  </div>
+  <script>
+    var count = 0
+    var flag_A = 1
+    var flag_B = 2
+    var flag_C = 4
+    var flag_D = 8
+    var flag_E = 16
+    var flag_F = 32
+    var flag_G = 64
+    var flag_H = 128
+    var el = document.querySelectorAll('.circle')
+    var current = document.querySelector('.current')
+    
+    var update = function() {
+      if (count & flag_A) {
+        // 0101 & 0100 => 0100 => true
+        el[0].style.background = '#bada55'
+      } else{ el[0].style.background = 'indigo' }
+      if (count & flag_B) {
+        // 0101 & 0100 => 0100 => true
+        el[1].style.background = '#bada55'
+      } else{ el[1].style.background = 'indigo' }
+      if (count & flag_C) {
+        // 0101 & 0100 => 0100 => true
+        el[2].style.background = '#bada55'
+      } else{ el[2].style.background = 'indigo' }
+      if (count & flag_D) {
+        // 0101 & 0100 => 0100 => true
+        el[3].style.background = '#bada55'
+      } else{ el[3].style.background = 'indigo' }
+      if (count & flag_E) {
+        // 0101 & 0100 => 0100 => true
+        el[4].style.background = '#bada55'
+      } else{ el[4].style.background = 'indigo' }
+      if (count & flag_F) {
+        // 0101 & 0100 => 0100 => true
+        el[5].style.background = '#bada55'
+      } else{ el[5].style.background = 'indigo' }
+      if (count & flag_G) {
+        // 0101 & 0100 => 0100 => true
+        el[6].style.background = '#bada55'
+      } else{ el[6].style.background = 'indigo' }
+      if (count & flag_H) {
+        // 0101 & 0100 => 0100 => true
+        el[7].style.background = '#bada55'
+      } else{ el[7].style.background = 'indigo' }
+      
+      current.innerHTML = count
+      count++
+      if(count > 255) count = 0
+    }
+    
+    window.setInterval(update, 200)
+    
+  </script>
+</body>
+</html>
