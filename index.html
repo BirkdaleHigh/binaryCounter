@@ -46,7 +46,7 @@
     <label for="speed">Count speed</label> <br>
     <span>Fastest</span>
     <input type="range" name="speed" min="100" max="2000" value="200" step="100">
-    <span>Slowest</span>
+    <span>Stopped</span>
   </div>
   <script>
     var timerID
@@ -58,7 +58,9 @@
 
     speedRange.addEventListener("input", function(){
       clearInterval(timerID)
-      timerID = window.setInterval(update, this.value)
+      if(this.value !== this.max){
+        timerID = window.setInterval(update, this.value)
+      }
     })
     
     var update = function() {
