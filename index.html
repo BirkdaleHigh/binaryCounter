@@ -90,7 +90,12 @@
       
       current.innerHTML = count
       count++
-      if(count > 255) count = 0
+
+      // Reset overflowing the 8bit display.
+      if(count > 255){
+        count = 0
+      }
+
     }
     
     window.setInterval(update, 200)
