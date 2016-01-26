@@ -4,19 +4,18 @@
   <meta charset="UTF-8">
   <title>Binary Counter</title>
   <style>
-    html,body{height: 100%;}
+    html,body{height: 100%;margin: 0;}
     body,.circle{
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
     }
-    div{
+    .digram{
       display: flex;
       width: 960px;
-      height: 100px;
       justify-content: space-between;
-     flex-direction: row-reverse;
+      flex-direction: row-reverse;
     }
     .circle{
       width: 100px;
@@ -26,11 +25,12 @@
       background: indigo;
       color: indigo;
     }
+    .current{font-size: 50px;}
   </style>
 </head>
 <body>
- <h2>Count</h2>
- <h2 class="current"></h2>
+ <h1>Numbers In Binary</h1>
+ <h2 class="current">0</h2>
   <div class="digram">
     <div class="circle">1</div>
     <div class="circle">2</div>
