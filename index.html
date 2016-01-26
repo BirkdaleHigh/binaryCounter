@@ -43,51 +43,22 @@
   </div>
   <script>
     var count = 0
-    var flag_A = 1
-    var flag_B = 2
-    var flag_C = 4
-    var flag_D = 8
-    var flag_E = 16
-    var flag_F = 32
-    var flag_G = 64
-    var flag_H = 128
+    var bits = [1,2,4,8,16,32,64,128]
     var el = document.querySelectorAll('.circle')
     var current = document.querySelector('.current')
     
     var update = function() {
-      if (count & flag_A) {
-        // 0101 & 0100 => 0100 => true
-        el[0].style.background = '#bada55'
-      } else{ el[0].style.background = 'indigo' }
-      if (count & flag_B) {
-        // 0101 & 0100 => 0100 => true
-        el[1].style.background = '#bada55'
-      } else{ el[1].style.background = 'indigo' }
-      if (count & flag_C) {
-        // 0101 & 0100 => 0100 => true
-        el[2].style.background = '#bada55'
-      } else{ el[2].style.background = 'indigo' }
-      if (count & flag_D) {
-        // 0101 & 0100 => 0100 => true
-        el[3].style.background = '#bada55'
-      } else{ el[3].style.background = 'indigo' }
-      if (count & flag_E) {
-        // 0101 & 0100 => 0100 => true
-        el[4].style.background = '#bada55'
-      } else{ el[4].style.background = 'indigo' }
-      if (count & flag_F) {
-        // 0101 & 0100 => 0100 => true
-        el[5].style.background = '#bada55'
-      } else{ el[5].style.background = 'indigo' }
-      if (count & flag_G) {
-        // 0101 & 0100 => 0100 => true
-        el[6].style.background = '#bada55'
-      } else{ el[6].style.background = 'indigo' }
-      if (count & flag_H) {
-        // 0101 & 0100 => 0100 => true
-        el[7].style.background = '#bada55'
-      } else{ el[7].style.background = 'indigo' }
       
+      bits.forEach(function(flag, index){
+        // Mask the count value with the flag of the bit position we're looking for
+        if(count & flag){
+          el[index].style.background = '#bada55'
+        } else {
+          el[index].style.background = 'indigo'
+        }
+      })
+
+      // Display the counted value
       current.innerHTML = count
       count++
 
@@ -98,6 +69,7 @@
 
     }
     
+    // Start adding up
     window.setInterval(update, 200)
     
   </script>
