@@ -26,6 +26,7 @@
       color: indigo;
     }
     .current{font-size: 50px;}
+    .control input{width:300px;margin:15px 15px 0;}
   </style>
 </head>
 <body>
@@ -41,11 +42,24 @@
     <div class="circle">64</div>
     <div class="circle">128</div>
   </div>
+  <div class="control">
+    <label for="speed">Count speed</label> <br>
+    <span>Fastest</span>
+    <input type="range" name="speed" min="100" max="2000" value="200" step="100">
+    <span>Slowest</span>
+  </div>
   <script>
+    var timerID
     var count = 0
     var bits = [1,2,4,8,16,32,64,128]
     var el = document.querySelectorAll('.circle')
     var current = document.querySelector('.current')
+    var speedRange = document.querySelector("input[name='speed']")
+
+    speedRange.addEventListener("input", function(){
+      clearInterval(timerID)
+      timerID = window.setInterval(update, this.value)
+    })
     
     var update = function() {
       
@@ -70,7 +84,7 @@
     }
     
     // Start adding up
-    window.setInterval(update, 200)
+    timerID = window.setInterval(update, speedRange.value)
     
   </script>
 </body>
