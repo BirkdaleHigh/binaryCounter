@@ -59,12 +59,15 @@
     var current = document.querySelector('.current')
     var speedRange = document.querySelector("input[name='speed']")
 
-    speedRange.addEventListener("input", function(){
+    var updateTimer = function(){
       clearInterval(timerID)
       if(this.value !== this.max){
         timerID = window.setInterval(update, this.value)
       }
-    })
+    }
+
+    speedRange.addEventListener("input", updateTimer)
+    speedRange.addEventListener("change", updateTimer)
     
     var update = function() {
       
