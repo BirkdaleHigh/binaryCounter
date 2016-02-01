@@ -1,17 +1,12 @@
 /*
-  Blink
-  Turns on an LED on for one second, then off for one second, repeatedly.
+  Binary Counter
 
-  Most Arduinos have an on-board LED you can control. On the Uno and
-  Leonardo, it is attached to digital pin 13. If you're unsure what
-  pin the on-board LED is connected to on your Arduino model, check
-  the documentation at http://www.arduino.cc
+  Demonstration code for a display in Birkdale High School
 
-  This example code is in the public domain.
-
-  modified 8 May 2014
-  by Scott Fitzgerald
+  Written for Hardware and Pi programming clubs.
  */
+
+// variables we will need to use later on
 int pin[] = {2,3,4,5,6,7,8,9};
 int pinAmount = sizeof(pin)/sizeof(int);
 int buttonState = 0;
