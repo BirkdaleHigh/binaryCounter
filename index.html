@@ -88,6 +88,7 @@
     var speedHigh = document.querySelector("button[name='high']")
     var speedRange = document.querySelector("input[name='speed']")
     var stepCount = document.querySelector("#step")
+    var delay = document.querySelector("#delay")
 
     var updateTimer = function(){
       clearInterval(timerID)
@@ -97,6 +98,7 @@
         timerID = null
       }
       reveal(timerID, speedLow, stepCount)
+      delay.innerHTML = speedRange.value === speedRange.max ? '&#8734; ms' : speedRange.value + ' ms'
     }
 
     var reveal = function(watch, show, hide){
@@ -145,7 +147,7 @@
     stepCount.addEventListener("click", update)
 
     // Start adding up
-    timerID = window.setInterval(update, speedRange.value)
+    updateTimer()
 
   </script>
 </body>
