@@ -25,11 +25,37 @@
       height: 100px;
       border-radius: 50px;
       font-size: 50px;
-      background: indigo;
-      color: indigo;
+      background: #556270;
+      color: #556270;
+    }
+    .circle.active{
+      background: #C7F464;
     }
     .current{font-size: 50px;}
     .control input{width:300px;margin:15px 15px 0;}
+    .control >*:focus{outline: none;}
+    .control >*:active{background: #C7F464;}
+    .button{
+      display: inline-block;
+      width: 130px;
+      margin: 0;
+      padding: 5px;
+      text-align: center;
+      border: 0;
+    }
+    .hide{ display: none; }
+    i.icon{
+      font-style: normal;
+      font-size: 3em;
+      display: inline-block;
+      line-height: 0;
+      vertical-align: middle;
+    }
+    .bg-info{ background-color: #556270; }
+    .bg-success{ background-color: #C7F464; }
+    .bg-attention{ background-color: #4ECDC4; }
+    .bg-warn{ background-color: #FF6B6B; }
+    .bg-fail{ background-color: #C44D58; }
   </style>
 </head>
 <body>
@@ -46,10 +72,11 @@
     <div class="circle">128</div>
   </div>
   <div class="control">
-    <label for="speed">Count speed</label> <br>
-    <span>Fastest</span>
-    <input type="range" name="speed" min="100" max="2000" value="200" step="100">
-    <span>Stopped</span>
+    <label for="speed">Count speed (delay: <span id="delay"></span>)</label> <br>
+    <button class="button bg-attention hide" id="step">Step <i class="icon">&#10145;</i></button>
+    <button class="button" name="low" for="speed">Stopped</button>
+    <input style="direction: rtl" type="range" name="speed" min="100" max="2000" value="200" step="100">
+    <button class="button" name="high" for="speed">Fastest</button>
   </div>
   <script>
     var timerID
@@ -57,26 +84,39 @@
     var bits = [1,2,4,8,16,32,64,128]
     var el = document.querySelectorAll('.circle')
     var current = document.querySelector('.current')
+    var speedLow = document.querySelector("button[name='low']")
+    var speedHigh = document.querySelector("button[name='high']")
     var speedRange = document.querySelector("input[name='speed']")
+    var stepCount = document.querySelector("#step")
 
     var updateTimer = function(){
       clearInterval(timerID)
-      if(this.value !== this.max){
-        timerID = window.setInterval(update, this.value)
+      timerID = window.setInterval(update, speedRange.value)
+      if(speedRange.value === speedRange.max){
+        clearInterval(timerID)
+        timerID = null
+      }
+      reveal(timerID, speedLow, stepCount)
+    }
+
+    var reveal = function(watch, show, hide){
+      if(watch){
+        hide ? hide.style.display = 'none' : null
+        show ? show.style.display = 'inline-block' : null
+      } else {
+        hide ? hide.style.display = 'inline-block' : null
+        show ? show.style.display = 'none' : null
       }
     }
 
-    speedRange.addEventListener("input", updateTimer)
-    speedRange.addEventListener("change", updateTimer)
-    
     var update = function() {
-      
+
       bits.forEach(function(flag, index){
         // Mask the count value with the flag of the bit position we're looking for
         if(count & flag){
-          el[index].style.background = '#bada55'
+          el[index].classList.add('active')
         } else {
-          el[index].style.background = 'indigo'
+          el[index].classList.remove('active')
         }
       })
 
@@ -90,10 +130,23 @@
       }
 
     }
-    
+
+    speedRange.addEventListener("input", updateTimer)
+    speedRange.addEventListener("change", updateTimer)
+
+    speedHigh.addEventListener("click", function(){
+      speedRange.value = speedRange.min
+      updateTimer()
+    })
+    speedLow.addEventListener("click", function(){
+      speedRange.value = speedRange.max
+      updateTimer()
+    })
+    stepCount.addEventListener("click", update)
+
     // Start adding up
     timerID = window.setInterval(update, speedRange.value)
-    
+
   </script>
 </body>
 </html>
